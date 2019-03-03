@@ -3,45 +3,45 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ColLesson04 {
+
+
     public static void main(String[] args) {
-        ArrayList<Word> word_array = new ArrayList<>();
-        ArrayList<Word> meaning_array = new ArrayList<>();
+
+        ArrayList<Word> words = new ArrayList<>();
+
 
         System.out.println("わからなかった単語とその意味をスペースで区切って入力してください");
-        System.out.println();
         Scanner sc = new Scanner(System.in);
+        // 空白を入れて使用するため、nextLine
+        String input = sc.nextLine();
 
 
-        while (sc2.hasNext()) {                   //ScannerクラスのhasNext()メソッド
-            System.out.println(sc2.next());     //next()メソッドを使い文字を分割
-        }
+        int index = 0;
 
-        String[] word = sc.split(",");
-        String[] meaning = sc.split(" ");
+        while (!input.equals("e")) {
+//取得したinputを、splitで半角スペースで分割
+//            split はStringの文字列
+            String[] tmp = input.split("　");
+            Word wd = new Word(tmp[0], tmp[1]);
 
-        int i = 0;
-        while(word[i] != "e") {
-            System.out.println("次の単語と意味を入力してください。"+"e"+"で終了します");
-
-            System.out.println();
-            Scanner sc = new Scanner(System.in);
-
-            while(sc2.hasNext()){                   //ScannerクラスのhasNext()メソッド
-                System.out.println(sc2.next());     //next()メソッドを使い文字を分割
+            try {
+                words.add(wd);
+            }catch(IndexOutOfBoundsException e){
+                System.out.println("登録制限を超えました。登録済みのデータは以下になります。");
+                break;
             }
-
-            String[] word = sc.split(",");
-            String[] meaning = sc.split(" ");
-
-
+            index++;
+            System.out.println("次の単語と意味を入力してください。\"e\"で終了します。");
+            input = sc.nextLine();
         }
 
 
-        for (int x= 0; x < word.length; x++) {
-            Word.attack();
-
+        for (int i = 0; i < index; i++) {
+            System.out.println("単語：" + words.get(i).word + " 意味：" + words.get(i).meaning);
 
         }
+        System.out.println(words.size() + "件、登録しました。");
     }
 }
+
 

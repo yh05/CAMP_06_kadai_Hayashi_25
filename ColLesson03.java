@@ -3,59 +3,45 @@ package com.Word;
 import java.util.Scanner;
 
 public class ColLesson03 {
-//    Word word = new Word();
-//
-
 
 
     public static void main(String[] args) {
-        String[] word = new String[10];
-        String[] meaning = new String[10];
+
+        Word[] words = new Word[5];
 
 
-
-//        for (int i = 0; i < 4.; i++) {
-//            System.out.println(question[i]);
-//
-//            for (int j = 0; j < 4.; j++) {
-//                System.out.print(choices[j]);
-//
-//            }
-        System.out.println("わからなかった単語とその意味をスペースで区切って入力してください");
-        System.out.println();
+        System.out.println("わからなかった単語とその意味をスペースで区切って入力してください。");
         Scanner sc = new Scanner(System.in);
+        // 空白を入れて使用するため、nextLine
+        String input = sc.nextLine();
 
 
-        while (sc2.hasNext()) {                   //ScannerクラスのhasNext()メソッド
-            System.out.println(sc2.next());     //next()メソッドを使い文字を分割
-        }
+        int index = 0;
 
-        String[] word = sc.split(",");
-        String[] meaning = sc.split(" ");
+        while (!input.equals("e")) {
+//取得したinputを、splitで半角スペースで分割
+//            split はStringの文字列
+            String[] tmp = input.split("　");
+            Word wd = new Word(tmp[0], tmp[1]);
 
-        int i = 0;
-        while(word[i] != "e") {
-            System.out.println("次の単語と意味を入力してください。"+"e"+"で終了します");
-
-        System.out.println();
-        Scanner sc = new Scanner(System.in);
-
-        while(sc2.hasNext()){                   //ScannerクラスのhasNext()メソッド
-            System.out.println(sc2.next());     //next()メソッドを使い文字を分割
-        }
-
-        String[] word = sc.split(",");
-        String[] meaning = sc.split(" ");
-
-
+            try {
+                words[index] = wd;
+            }catch(IndexOutOfBoundsException e){
+                System.out.println("登録制限を超えました。登録済みのデータは以下になります。");
+            break;
+            }
+            index++;
+            System.out.println("次の単語と意味を入力してください。\"e\"で終了します。");
+            input = sc.nextLine();
         }
 
 
-        for (int x= 0; x < word.length; x++) {
-            Word.attack();
-
+        for (int i = 0; i < index; i++) {
+            System.out.println("単語：" + words[i].word + " 意味：" + words[i].meaning);
 
         }
+        System.out.println(index + "件、登録しました。");
     }
 }
-//
+
+
